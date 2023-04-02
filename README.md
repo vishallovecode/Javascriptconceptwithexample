@@ -1,1 +1,1 @@
-# Learning new concepts from basic to advanced in Javascript
+# Learning new concepts from basic to advanced in Javascript.
