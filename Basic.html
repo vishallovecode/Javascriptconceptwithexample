@@ -1,5 +1,61 @@
-<!DOCTYPE html>
+
+<head>
+    <style>
+      li{
+        border: 2px solid red;;
+        height: 50px;
+        width: 50px;
+        padding: 5px;
+        margin: 5px;
+      }
+
+      ul {
+        border: 2px solid blue;
+        padding: 5px;
+      }
+
+      .cont {
+        border: 4px solid black;
+        padding: 5px;
+      }
+    </style>
+</head>
 <body>
-<div>HELLO STARTING SOON..</div>
+ 
+    <!-- <div class="cont" >
+        <ul onclick="grandParent(event)" id ="parent">
+            <li value="1">
+                <span onclick="alert(1) ;">1</span>
+                <button  id  = "12345" onclick="addData(event , 1) ; addMe(event) ">Add </button>
+            </li>
+            <li value="2" >
+                <span onclick="alert(2)">2</span>
+                <button onclick="addData(event , 2)">Add </button>
+            </li>
+            <li value="3" >
+                3
+            </li>
+            <li value="4" >
+                4
+            </li >
+            <li  value="5">
+                5
+            </li>
+            <li value="6" >
+                6
+            </li>
+            <li onclick="alert('Hey i am child')" value="7" >
+                7
+            </li>
+
+        </ul>
+    </div> -->
+
+    <div  onclick = "parentCall(event)">
+        <button id="234567" >Add me</button>
+    </div>
+
+<script   src = 'EeventDelegation.js'></script>
 </body>
-</html>
+</html>   
+

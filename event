@@ -1,0 +1,4 @@
+const grandParent = (e)=> {
+    console.log(this);
+    console.log(e.target)
+}

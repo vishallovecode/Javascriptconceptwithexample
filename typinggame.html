@@ -1,0 +1,70 @@
+<head>
+    <style>
+        #container {
+            display: flex;
+            width: 80%;
+            height: 300px;
+            align-items: center;
+            border: 2px solid red;
+        }
+
+        #timer {
+            height: 50px;
+            width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgb(38, 28, 28);
+        }
+
+        #wpm {
+            height: 50px;
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+            width: 200px;
+            border: 2px solid rgb(38, 28, 28);
+        }
+
+        .timer-cnt {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-direction: row;
+        }
+
+        .correct {
+            color: green;
+            font-size: 30px;
+        }
+
+        .incorrect {
+            color: red;
+            text-decoration: underline;
+        }
+
+        #container {
+            border: 1px solid red;
+            height: 200px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class='timer-cnt'>
+        <div id='timer'>0</div>
+        <div id='wpm'>
+            0
+        </div>
+    </div>
+    <div id='container'>
+        <div id='quote-cont'>
+
+        </div>
+    </div>
+    <script src='TypingGame.js'></script>
+</body>
+
+</html>
