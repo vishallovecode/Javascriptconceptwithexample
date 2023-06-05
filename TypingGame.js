@@ -18,25 +18,31 @@ const getQuote = () => {
     res.json().then((result) => result.content)
   );
 };
+
 // start Timer
 let timerId = null;
 let isTimerRunning = false;
 let currentDate;
+let correctStep = [];
 const startTimer = () => {
   timer.innerText = 0;
   isTimerRunning = true;
   currentDate = new Date();
   timerId = setInterval(() => {
-    timer.innerText = Math.floor((new Date() - currentDate) / 1000);
+    timer.innerText = geTime();
   }, 1000);
 };
 
+const geTime = () => {
+  return Math.floor((new Date() - currentDate) / 1000);
+};
 // stop timer
 const stopTimer = () => {
   timer.innerText = 0;
   clearInterval(timerId);
   isTimerRunning = false;
 };
+
 // clicking on container
 window.addEventListener("click", (e) => {
   if (container.contains(e.target)) {
@@ -53,6 +59,8 @@ let arrayQuote = [];
 const displayContent = async () => {
   const content = await getQuote();
   arrayQuote = content.split("");
+  correctStep = new Array(arrayQuote.length);
+  correctStep.fill(-1);
   arrayQuote.forEach((key) => {
     const span = document.createElement("span");
     span.innerText = key;
@@ -90,13 +98,37 @@ window.addEventListener("keydown", (e) => {
     keyCode == 190 ||
     keyCode == 186
   ) {
-    // key is equivalent to the value than  change css
-    const data = document.getElementById("quote-cont");
-
     if (arrayQuote[currentIndex].toLowerCase() == e.key.toLowerCase()) {
-      console.log(quoteContainer.childNodes[currentIndex]);
       quoteContainer?.childNodes[currentIndex]?.classList?.add("correct");
-      currentIndex++;
+      correctStep[currentIndex] = 1;
+    } else {
+      quoteContainer?.childNodes[currentIndex]?.classList?.add("incorrect");
+      correctStep[currentIndex] = -1;
     }
+    currentIndex++;
+    getWpm();
   }
 });
+
+//
+
+const getWpm = () => {
+  if (geTime() > 0) {
+    const wpm1 = Math.round(
+      parseFloat(getCorrectTypingNumber()) / 5.0 / (parseFloat(geTime()) / 60.0)
+    );
+    wpm.innerText = wpm1;
+  }
+};
+
+function getCorrectTypingNumber() {
+  let count = 0;
+  correctStep.forEach((item) => {
+    if (item == 1) {
+      count++;
+    }
+  });
+  return count;
+}
+
+// Math.round(parseFloat(correctStrokes()) / 5.0 / (parseFloat(Time-Elapsed(sec)) / 60.0));
