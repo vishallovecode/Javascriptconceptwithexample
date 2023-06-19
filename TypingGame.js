@@ -51,6 +51,11 @@ window.addEventListener("click", (e) => {
     }
   } else {
     stopTimer();
+    resetTypingNumber();
+    quoteContainer.childNodes.forEach((elem) => {
+      elem.className = "";
+    });
+    currentIndex = 0;
   }
 });
 
@@ -58,6 +63,10 @@ window.addEventListener("click", (e) => {
 let arrayQuote = [];
 const displayContent = async () => {
   const content = await getQuote();
+  if (isTimerRunning) {
+    stopTimer();
+    startTimer();
+  }
   arrayQuote = content.split("");
   correctStep = new Array(arrayQuote.length);
   correctStep.fill(-1);
@@ -71,46 +80,46 @@ const displayContent = async () => {
 
 displayContent();
 
-// small alphabet
-// code>65 and code<91
-// 188 comma
-// 186 ;
-// space  32
-
-// 222 '
-// dash 189
-// / 191
-// back space 8
-// 190
-
-// keydown
-
-// will handle backspace seperately
 window.addEventListener("keydown", (e) => {
-  const keyCode = +e.keyCode;
-  if (
-    (keyCode > 65 && keyCode < 91) ||
-    keyCode == 32 ||
-    keyCode == 188 ||
-    keyCode == 222 ||
-    keyCode == 189 ||
-    keyCode == 191 ||
-    keyCode == 190 ||
-    keyCode == 186
-  ) {
-    if (arrayQuote[currentIndex].toLowerCase() == e.key.toLowerCase()) {
-      quoteContainer?.childNodes[currentIndex]?.classList?.add("correct");
-      correctStep[currentIndex] = 1;
+  if (isTimerRunning) {
+    const keyCode = +e.keyCode;
+    if (
+      (charCode > 64 && charCode < 91) ||
+      (charCode > 96 && charCode < 123) ||
+      charCode === 32 ||
+      charCode === 188 ||
+      charCode === 186 ||
+      charCode === 222 ||
+      charCode === 190 ||
+      charCode === 191 ||
+      charCode === 49 ||
+      charCode === 189
+    ) {
+      if (arrayQuote[currentIndex] == e.key) {
+        quoteContainer.childNodes[currentIndex].className = "correct";
+        correctStep[currentIndex] = 1;
+      } else {
+        quoteContainer.childNodes[currentIndex].className = "incorrect";
+        correctStep[currentIndex] = -1;
+      }
+      currentIndex++;
+      getWpm();
+
+      if (currentIndex == arrayQuote.length) {
+        quoteContainer.innerHTML = "";
+        currentIndex = 0;
+        displayContent();
+      }
+      // backspace scenario
+    } else if (keyCode == 8) {
+      if (currentIndex === 0) return;
+      currentIndex--;
+      quoteContainer.childNodes[currentIndex].className = "";
     } else {
-      quoteContainer?.childNodes[currentIndex]?.classList?.add("incorrect");
-      correctStep[currentIndex] = -1;
+      console.error("Hey error occurred");
     }
-    currentIndex++;
-    getWpm();
   }
 });
-
-//
 
 const getWpm = () => {
   if (geTime() > 0) {
@@ -131,4 +140,6 @@ function getCorrectTypingNumber() {
   return count;
 }
 
-// Math.round(parseFloat(correctStrokes()) / 5.0 / (parseFloat(Time-Elapsed(sec)) / 60.0));
+function resetTypingNumber() {
+  correctStep = new Array(arrayQuote.length);
+}
