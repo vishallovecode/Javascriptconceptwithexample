@@ -85,12 +85,12 @@ console.log("object1", object1);
 
 // json.stringgiyf
 
-const deepCopy = (obj) => {
-  return updatedObj;
-};
+// const deepCopy = (obj) => {
+//   return updatedObj;
+// };
 
-const deepObject = deepCopy(object);
-deepObject.a.b.c = 12;
+// const deepObject = deepCopy(object);
+// deepObject.a.b.c = 12;
 
 let result = {};
 
@@ -122,3 +122,23 @@ bb.name = "vishal"; // this will not effect the original object this is deep cop
 
 console.log("aa", aa); //
 console.log("bb", bb); //
+
+// protoype ??
+
+const cloneDeep = (obj) => {
+  if (obj == null && typeof obj != "object") {
+    return obj;
+  }
+  const result = {};
+  for (let key in obj) {
+    result[key] = cloneDeep(obj[key]);
+  }
+  return result;
+};
+
+const updatedObject1 = cloneDeep(object);
+
+updatedObject1.college = "Lpu";
+
+console.log(updatedObject1);
+console.log(object);
