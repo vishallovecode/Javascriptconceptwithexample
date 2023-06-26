@@ -65,7 +65,7 @@ const object = {
   f: {
     f1: {
       f2: {
-        f3: [],
+        f3: [124],
       },
     },
   },
@@ -78,6 +78,23 @@ const object = {
   },
 };
 
-const flatObject = (obj) => {};
+let result = {};
 
-flatObject(object); //  {f:null, f3: [], z3:12345}
+const flatObject = (obj) => {
+  for (let key in obj) {
+    if (
+      typeof obj[key] != "object" ||
+      Array.isArray(obj[key]) ||
+      obj[key] === null
+    ) {
+      console.log(result, "result");
+      result[key] = obj[key];
+    } else {
+      flatObject(obj[key]); // wrong way
+    }
+  }
+  return result;
+};
+
+const updatedResult = flatObject(object);
+console.log(updatedResult);
