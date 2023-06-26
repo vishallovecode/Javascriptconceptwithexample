@@ -2,6 +2,7 @@
 // setInterval
 
 // action  => callback back functiom
+// hof
 const throttle = (callback, delay) => {
   let waiting = false;
   return (...args) => {
@@ -12,20 +13,71 @@ const throttle = (callback, delay) => {
     waiting = true;
     setTimeout(() => {
       waiting = false;
-    }, 5000);
+    }, delay);
   };
 };
-
 const sum = (a, b) => {
   console.log(a + b);
-  // calculation
 };
 
-const throttlesum = throttle(sum, 1000);
+const sumWhichDelayBy1Second = throttle(sum, 1000);
 
-throttlesum(10, 20);
+sumWhichDelayBy1Second(10, 20);
 
-throttlesum(30, 60);
 setTimeout(() => {
-  throttlesum(40, 60);
+  sumWhichDelayBy1Second(140, 20, 100, 200); // will execute
 }, 5000);
+
+sumWhichDelayBy1Second(40, 60);
+
+// callback = throttle(sum, 1000)
+Array.prototype.mymap = function (callback) {
+  for (let i = 0; i < this.length; i++) {
+    callback(this[i], i);
+  }
+};
+
+const func1 = throttle(sum, 1000);
+
+// [1, 2, 3, 5].mymap(throttle(sum, 1000));
+
+// [1, 2, 3, 5].mymap(func1);
+
+const callme123 = (callback) => {
+  console.log(callback);
+};
+
+callme123(func1); //
+callme123(throttle(sum, 1000)); //
+
+const object = {
+  a: {
+    b: {
+      c: {
+        d: {
+          e: {
+            f: null,
+          },
+        },
+      },
+    },
+  },
+  f: {
+    f1: {
+      f2: {
+        f3: [],
+      },
+    },
+  },
+  z: {
+    z1: {
+      z2: {
+        z3: 12345,
+      },
+    },
+  },
+};
+
+const flatObject = (obj) => {};
+
+flatObject(object); //  {f:null, f3: [], z3:12345}
