@@ -78,6 +78,20 @@ const object = {
   },
 };
 
+const object1 = { ...object };
+object1.a.b.c = 23;
+console.log("object", object); //
+console.log("object1", object1);
+
+// json.stringgiyf
+
+const deepCopy = (obj) => {
+  return updatedObj;
+};
+
+const deepObject = deepCopy(object);
+deepObject.a.b.c = 12;
+
 let result = {};
 
 const flatObject = (obj) => {
@@ -98,3 +112,13 @@ const flatObject = (obj) => {
 
 const updatedResult = flatObject(object);
 console.log(updatedResult);
+
+const aa = { f: 123 };
+const cc = aa; //
+cc.name = "raj"; // a object also changed becase line no.108 we are doing reference copy
+const bb = { ...aa }; // spread
+
+bb.name = "vishal"; // this will not effect the original object this is deep copy
+
+console.log("aa", aa); //
+console.log("bb", bb); //
