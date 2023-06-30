@@ -175,6 +175,9 @@ var object111 = {
 
 const chaining = (object) => {};
 
+const NameS = "VISHAL";
+console.log(NameS.tttttt); // undefined
+
 const DaTa = {
   name: "Vishal",
   city: {
@@ -189,3 +192,49 @@ const DaTa = {
 };
 
 // chaining(DaTa, "name.city.a.b.c.d"); //  123
+
+let student = {
+  name: "Adam",
+  lasdtName: "Gil",
+  address: {
+    local: {
+      city: "UK",
+      // => 1235667
+    },
+  },
+  department: {
+    block: {
+      name: "36A",
+    },
+  },
+  hostel: {
+    name: "BH3",
+  },
+  collegeName: {
+    name: "LPU",
+  },
+};
+const {
+  address: {
+    local: { pincode: cityPincode = "12345" },
+  },
+} = student;
+
+console.log("pincode", cityPincode);
+
+// const departMentBlockName = student.department.block.name;
+// const HostelName = student.hostel.name;
+
+const {
+  department: {
+    block: { name: departMentBlockName },
+  },
+  hostel: { name: HostelName },
+} = student;
+
+console.log(departMentBlockName, HostelName);
+
+const t = { a1: 123, b1: 235 };
+
+const { a1: a, b1: b } = t;
+console.log(a, b, "object destructring");
