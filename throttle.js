@@ -125,20 +125,67 @@ console.log("bb", bb); //
 
 // protoype ??
 
-const cloneDeep = (obj) => {
-  if (obj == null && typeof obj != "object") {
-    return obj;
-  }
-  const result = {};
-  for (let key in obj) {
-    result[key] = cloneDeep(obj[key]);
-  }
-  return result;
+// const cloneDeep = (obj) => {
+//   if (obj == null && typeof obj != "object") {
+//     return obj;
+//   }
+//   const result = {};
+//   for (let key in obj) {
+//     result[key] = cloneDeep(obj[key]); // how this working
+//   }
+//   return result;
+// };
+
+// const updatedObject1 = cloneDeep(object);
+
+// updatedObject1.a.b.c = "Lpu";
+
+// console.log("updatedObject1", updatedObject1);
+// console.log(object);
+
+// shallow copy vs deep clone copy
+
+// chaining operator
+
+//
+// const object1 = {
+//   city: {
+//     name: Kanpur,
+//     b: {
+//       userName: "Vishal",
+//       lastName: null,
+//     },
+//     mobile: {
+//       phone: "9915378881",
+//     },
+//   },
+// };
+
+var object111 = {
+  city: {
+    name: "Kanpur",
+    b: null,
+    mobile: {
+      phone: "9915378881",
+    },
+  },
 };
 
-const updatedObject1 = cloneDeep(object);
+// when we will try to access any key from null and undefined value than  you will get the error cannot read properties of undefined
 
-updatedObject1.college = "Lpu";
+const chaining = (object) => {};
 
-console.log(updatedObject1);
-console.log(object);
+const DaTa = {
+  name: "Vishal",
+  city: {
+    a: {
+      b: {
+        c: {
+          d: 123,
+        },
+      },
+    },
+  },
+};
+
+// chaining(DaTa, "name.city.a.b.c.d"); //  123
