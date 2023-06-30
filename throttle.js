@@ -238,3 +238,32 @@ const t = { a1: 123, b1: 235 };
 
 const { a1: a, b1: b } = t;
 console.log(a, b, "object destructring");
+
+//
+const studentsMarks = [34, 56, 86];
+studentsMarks[3] = 78;
+
+const marks = { math: "234", english: 299 };
+
+const subject = "math";
+
+const { [subject]: mathMarks, english } = marks; // undefined
+
+console.table(student);
+
+// const { log: mylog } = console;
+
+// mylog("hey I ma logging");
+
+// const Nlog = (message) => {
+//   console.log(message);
+// };
+
+const newtons = [
+  { name: "vishal", grade: "A" },
+  { name: "vishal1", grade: "AA" },
+];
+
+for (let { name, grade } of newtons) {
+  console.log(name, grade);
+}
